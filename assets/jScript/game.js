@@ -68,7 +68,16 @@ gameData = {
         this.correct.length = 0;
         this.incorrect.length = 0;
         this.used.length = 0;
-        this.unused = alpha
+        this.unused = alpha;
+        correctletters="";
+        incorrectletters="";
+        docIncUsedLetters.textContent = incorrectletters;
+        docCorUsedLetters.textContent = correctletters;
+        docGuesses.textContent = guesses;
+        start.choice();
+        start.hiddenWord(compChoice);
+        docHiddenWord.textContent = hiddenWord;
+
     },
     random: function () {
         l = this.availableWords.length;
@@ -197,8 +206,7 @@ document.onkeyup = function (event) {
         
         if (restart) {
             gameData.reset();
-            start.choice();
-            start.hiddenWord(compChoice);
+            
         }
     }
     else if(guesses <= 0){
@@ -211,8 +219,6 @@ document.onkeyup = function (event) {
         let restart = confirm("You Lost! Do you want to play again?");
         if (restart) {
             gameData.reset();
-            start.choice();
-            start.hiddenWord(compChoice);
         }
     }
 }
