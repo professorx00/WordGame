@@ -11,10 +11,20 @@
     <title>Word Games</title>
   </head>
   <body>
-    
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <div class="container">
+        <header class="title">
+            <h1>Word Finder</h1><h3>Movie Edition</h3>
+        </header>
+        <div id="hiddenWord">--</div>
+        <div class="guesses">Guesses Left: <span id="guessLeft">10</span></div>
+        <div class="usedContainer">
+            Letters that have been used are : 
+            <p id="letterUsed">a</p>
+        </div>
+        <div class="wins">Number of Wins: <span id="wins">0</span></div>
+        <div class="losses">Number of Wins: <span id="loss">0</span></div>
+        <div>Instructions: Please press letters on your keyboard till you find the title of the movie or you run out of guesses</div>
+    </div>
     <script src="./jScript/game.js"></script>
     </body>
 </html>

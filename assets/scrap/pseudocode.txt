@@ -1,0 +1,37 @@
+Word Game:
+
+Description: Computer Generates a random word. The player guess via key board letters. They have 10 chances to guess a 4-8 letter word. 
+Theme: Movies
+
+Vaviables Need:
+
+Initlize Game:
+    Create a computer guess store as COMPGUESS
+    Create Hidden Word
+    Display Hidden Word
+    Create GUESSES
+    Create WINS
+    Create LOSSES
+
+Repeat
+[Get User Letter for guess store as USERLETTER
+    ->Store in GUESSEDLETTERS
+
+Check COMPGUESS for USERLETTER
+    if USERLETTER exist in COMPGUESS then 
+        -> Change - to letter in HIDDENWORD and Display
+        ->Check IF GUESSES >0 
+            THEN check if HIDDENWORD has an -
+                then Repeat
+            Else
+                Remove a GU
+        Else
+            Add to LOSSES
+
+    Else deducted from GUESSES and add letter to GUESSEDLETTERS and MISSEDLETTERS]
+
+
+
+
+
+
