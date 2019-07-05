@@ -4,6 +4,14 @@ let guesses = 10;
 let win = 0;
 let loss = 0;
 let gameover = false;
+const alpha = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+let alphabool = false;
+let docHiddenWord = document.getElementById("hiddenWord");
+let docWin = document.getElementById("wins");
+let docLoss = document.getElementById("loss");
+let docIncUsedLetters = document.getElementById("incorrectUsed");
+let docCorUsedLetters = document.getElementById("correctUsed");
+let docGuesses = document.getElementById("guessLeft");
 
 
 gameData = {
@@ -44,7 +52,7 @@ gameData = {
         this.correct.length = 0;
         this.incorrect.length = 0;
         this.used.length = 0;
-        this.unused = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+        this.unused = alpha
     },
     random: function () {
         l = this.availableWords.length;
@@ -133,11 +141,32 @@ console.log("[start]hidden word "+hiddenWord);
 
 
 document.onkeydown = function (event) {
-    let run = gameData.checkHidden(hiddenWord);
-    if (run || !gameover || guesses > 0) {
-        gameData.checkLetter(event.key);
-        console.log("[key down]hidden word "+hiddenWord);
+    for(let a=0;a<alpha.length;a++){
+        if(alpha[a]==event.key){
+            alphabool = true;
+        }
+    }
+    if(alphabool){
+        let run = gameData.checkHidden(hiddenWord);
+        if (run || !gameover || guesses > 0) {
+            gameData.checkLetter(event.key);
+            console.log("[key down]hidden word "+hiddenWord);
+            
+            docHiddenWord.textContent = hiddenWord;
+            let corrrectletters ="";
+            for(let alpha=0;alpha<gameData.correct.length;alpha++){
+                corrrectletters=corrrectletters+" " +gameData.correct[alpha];
+            }
+            console.log(corrrectletters)
+            // docIncUsedLetters.textContent = "";
+            // docCorUsedLetters.textContent = "" ;
+            // docGuesses.textContent = "";
 
+        }
+        
+    }
+    else{
+        console.log("please choose a letter between a-z.");
     }
 }
 document.onkeyup = function (event) {
@@ -147,7 +176,10 @@ document.onkeyup = function (event) {
         win+=1; 
         console.log(win);
         console.log(loss);
+        docWin.textContent = win;
+        docLoss.textContent = loss;
         let restart = confirm("do you want to play again?");
+        
         if (restart) {
             gameData.reset();
             start.choice();
@@ -159,6 +191,8 @@ document.onkeyup = function (event) {
         console.log(win);
         loss+=1;
         console.log(loss);
+        docWin.textContent = win;
+        docLoss.textContent = loss;
         let restart = confirm("You Lost! Do you want to play again?");
         if (restart) {
             gameData.reset();
