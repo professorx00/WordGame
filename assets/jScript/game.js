@@ -38,7 +38,12 @@ gameData = {
         if (!found) {
             this.correct.push(value);
             this.used.push(value);
-            
+            for(let alpha=0;alpha<gameData.correct.length;alpha++){
+                console.log("the alpha is "+alpha);
+                console.log(gameData.correct[alpha]);
+                corLetter = gameData.correct[alpha];
+            }
+            correctletters = correctletters+" "+corLetter;
         }
     },
     addToIncorrect: function (value) {
@@ -164,12 +169,7 @@ document.onkeydown = function (event) {
             gameData.checkLetter(event.key);
             console.log("[key down]hidden word "+hiddenWord);
             docHiddenWord.textContent = hiddenWord;
-            for(let alpha=0;alpha<gameData.correct.length;alpha++){
-                console.log("the alpha is "+alpha);
-                console.log(gameData.correct[alpha]);
-                corLetter = gameData.correct[alpha];
-            }
-            correctletters = correctletters+" "+corLetter;
+            
             
             console.log(correctletters)
             docIncUsedLetters.textContent = incorrectletters;
