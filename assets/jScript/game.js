@@ -12,7 +12,10 @@ let docLoss = document.getElementById("loss");
 let docIncUsedLetters = document.getElementById("incorrectUsed");
 let docCorUsedLetters = document.getElementById("correctUsed");
 let docGuesses = document.getElementById("guessLeft");
-
+let correctletters ="";
+let corLetter = "";
+let incorrectletters ="";
+let incorLetter = "";
 
 gameData = {
     availableWords: ["dog style", "cat's", "Froggie run", "super cow"],
@@ -35,6 +38,7 @@ gameData = {
         if (!found) {
             this.correct.push(value);
             this.used.push(value);
+            
         }
     },
     addToIncorrect: function (value) {
@@ -45,6 +49,13 @@ gameData = {
         if (!found) {
             this.incorrect.push(value);
             this.used.push(value);
+            for(let alpha=0;alpha<this.incorrect.length;alpha++){
+                console.log("the alpha is "+alpha);
+                console.log(this.incorrect[alpha]);
+                incorLetter = this.incorrect[alpha];
+            }
+            incorrectletters = incorrectletters+" "+incorLetter;
+
         }
     },
     reset: function () {
@@ -137,6 +148,7 @@ start = {
 start.choice();
 console.log("[start]computers pick "+compChoice);
 start.hiddenWord(compChoice);
+docHiddenWord.textContent = hiddenWord;
 console.log("[start]hidden word "+hiddenWord);
 
 
@@ -151,15 +163,17 @@ document.onkeydown = function (event) {
         if (run || !gameover || guesses > 0) {
             gameData.checkLetter(event.key);
             console.log("[key down]hidden word "+hiddenWord);
-            
             docHiddenWord.textContent = hiddenWord;
-            let corrrectletters ="";
             for(let alpha=0;alpha<gameData.correct.length;alpha++){
-                corrrectletters=corrrectletters+" " +gameData.correct[alpha];
+                console.log("the alpha is "+alpha);
+                console.log(gameData.correct[alpha]);
+                corLetter = gameData.correct[alpha];
             }
-            console.log(corrrectletters)
-            // docIncUsedLetters.textContent = "";
-            // docCorUsedLetters.textContent = "" ;
+            correctletters = correctletters+" "+corLetter;
+            
+            console.log(correctletters)
+            docIncUsedLetters.textContent = incorrectletters;
+            docCorUsedLetters.textContent = correctletters;
             // docGuesses.textContent = "";
 
         }
@@ -171,6 +185,7 @@ document.onkeydown = function (event) {
 }
 document.onkeyup = function (event) {
     console.log("[keyup]Number of guesses: "+guesses);
+    docGuesses.textContent = guesses;
     if (!gameData.checkHidden(hiddenWord)) {
         console.log("You got it");
         win+=1; 
